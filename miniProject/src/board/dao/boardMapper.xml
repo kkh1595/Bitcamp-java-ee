@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardSQL">
+	<insert id="makeBoard" parameterType="board">
+		insert into board(seq,id,name,email,subject,content,ref,logtime) values(seq_board.nextval,#{id},#{name},#{email},#{subject},#{content},seq_board.currval,sysdate)
+	</insert>
+	
+	<select id="boardList" parameterType="java.lang.Integer" resultType="board">
+		select * from (select rownum rn,tt.* from (select * from board order by seq desc)tt) where rn between #{startNum} and #{endNum}
+	</select>
+
+	<select id="getTotalA" resultType="java.lang.Integer">
+		select count(*) from board
+	</select>
+
+	<select id="getBoard" parameterType="java.lang.Integer" resultType="board">
+		select * from board where seq=#{seq}
+	</select>
+	
+	<update id="modifyBoard" parameterType="board">
+		update board set subject=#{subject},content=#{content} where seq=#{seq}
+	</update>
+	
+	<select id="searchBoard" parameterType="java.util.Map" resultType="board">
+		select * from (select rownum rn,tt.* from (select * from board where subject like '%'||#{keyword}||'%' order by seq desc)tt) where <![CDATA[rn>=#{startNum}]]> and <![CDATA[rn<=#{endNum}]]>
+	</select>
+	
+	<select id="getTotalB" parameterType="String" resultType="Integer">
+		select count(*) from board where subject like '%'||#{keyword}||'%'
+	</select>
+	
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="board.bean.BoardDTO" alias="board"/>
+		<typeAlias type="member.bean.MemberDTO" alias="member"/> <!--DTO파일을 항상 풀네임으로 적기 귀찮으니 앞으로 user라 칭하겠다.  -->
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/> 
+			<!-- POLLED,UNPOOLED,JNDI(Java Naming and Directory Interface) -->
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+				<property name="username" value="c##java"/>
+				<property name="password" value="bit"/>  <!--커넥션 풀을 담당하고 있다. 기존의 context.xml를 만들필요 없다.-->
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="board/dao/boardMapper.xml"/>
+		<mapper resource="member/dao/memberMapper.xml" /> <!-- 리소스 속성은 경로로 취급하기 때문에 . 대신 /를 써야한다 -->
+	</mappers>
+</configuration>
