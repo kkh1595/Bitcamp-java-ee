@@ -1,5 +1,6 @@
 package board.service;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,9 +20,19 @@ public class BoardViewService implements CommandProcess {
 		 String id = (String)session.getAttribute("memId");
 		 BoardDAO dao = BoardDAO.getInstance();
 		 BoardDTO boardDTO = dao.getBoard(seq); 
-		 String boardId = boardDTO.getId();
-		 System.out.println(boardId);
+		 //조회수
+		 Cookie[] ar = request.getCookies();
+		 if(ar!=null) {
+			 for(int i=0; i<ar.length; i++) {
+				 if(ar[i].getName().equals("memHit")) {
+					 dao.hitUpdate(seq);
+					 ar[i].setMaxAge(0);
+					 response.addCookie(ar[i]);
+				 }
+			 }
+		 }
 		 
+		 String boardId = boardDTO.getId();
 		 
 		 request.setAttribute("id", id);
 		 request.setAttribute("seq", seq);

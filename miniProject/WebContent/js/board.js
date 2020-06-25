@@ -23,3 +23,14 @@ function checkModify(){
 		document.boardModifyForm.submit();
 	}
 }
+function checkBoard(){
+	if(document.getElementById("subject").value=="") {
+		alert("제목을 입력해주세요.");
+	}
+	else if(document.getElementById("content").value=="") {
+		alert("내용을 입력해주세요.");
+	}
+	else {
+		document.forms[0].submit();
+	}
+}

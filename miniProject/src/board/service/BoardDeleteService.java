@@ -2,18 +2,21 @@ package board.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.control.CommandProcess;
 
-public class BoardWriteFormService implements CommandProcess {
+import board.dao.BoardDAO;
+
+public class BoardDeleteService implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("memId");
-		request.setAttribute("display", "/board/boardWriteForm.jsp");
-		request.setAttribute("id", id);
+		//데이터 받기
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		//db
+		BoardDAO.getInstance().deleteBoard(seq);
+		request.setAttribute("display", "/board/boardDelete.jsp");
+		//응답
 		return "/main/index.jsp";
 	}
 

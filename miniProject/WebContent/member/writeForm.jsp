@@ -65,11 +65,18 @@
 			<input type=text name=addr2 id="addr2" placeholder="상세주소 입력" size=40><br></td>
 		</tr>
 		<tr align=center>
-			<td colspan=2><input type=button value=회원가입 onclick="checkWriteForm()"> 
+<!-- 			<td colspan=2><input type=button value=회원가입 onclick="checkWriteForm()">  -->
+			<td colspan=2><input type=button value=회원가입 onclick="reject()"> 
 			<input type=reset value=다시작성></td>
 		</tr>
 	</table>
 	</form>
-<script type="text/javascript" src="../js/member.js?ver=1"></script>
+<script type="text/javascript" src="../js/member.js?ver=1">
+</script>
+<script type="text/javascript">
+function reject(){
+	alert("신규가입불가");
+}
+</script>
 </body>
 </html>

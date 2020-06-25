@@ -1,5 +1,8 @@
 package board.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,11 +19,13 @@ public class BoardModifyService implements CommandProcess {
 		int pg = Integer.parseInt(request.getParameter("pg"));
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
-		BoardDTO dto = new BoardDTO();
-		dto.setSubject(subject);
-		dto.setContent(content);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("subject", subject);
+		map.put("content", content);
+		map.put("seq", seq);
 		BoardDAO dao = BoardDAO.getInstance();
-		dao.modifyBoard(dto);
+		dao.modifyBoard(map);
+		request.setAttribute("seq", seq);
 		request.setAttribute("pg", pg);
 		request.setAttribute("display", "/board/boardModify.jsp");
 		return "/main/index.jsp";

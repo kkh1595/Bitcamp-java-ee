@@ -18,16 +18,17 @@
 <tr >
 <td colspan=2>작성자</td>
 <td>${boardDTO.name }</td>
-<td >조회수 ${boardDTO.hit }</td>
+<td >조회수 ${boardDTO.hit}</td>
 </tr>
 <tr>
 <td colspan=4 height=200 valign=top style=white-space:pre-wrap>${boardDTO.content }</td>
 </tr>
 </table>
 <input type=button value=목록 onclick="location.href='boardList.do?pg=${pg}'">
+<input type=button value=답글 onclick="location.href='boardReplyForm.do?pseq=${boardDTO.seq}&pg=${pg }'">
 <c:if test="${id==boardId }">
 <input type=button value=글수정 onclick="location.href='boardModifyForm.do?seq=${seq }&pg=${pg }'">
-<input type=button value=삭제 onclick="">
+<input type=button value=삭제 onclick="location.href='boardDelete.do?seq=${seq}'">
 </c:if>
 </body>
 </html>

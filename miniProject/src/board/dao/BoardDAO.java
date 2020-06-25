@@ -2,6 +2,7 @@ package board.dao;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,20 +60,57 @@ public class BoardDAO {
 		sqlSession.close();
 		return boardDTO;
 	}
-	public void modifyBoard(BoardDTO boardDTO) {
+	public void modifyBoard(Map<String, Object> map) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		sqlSession.selectOne("boardSQL.modifyBoard", boardDTO);
+		sqlSession.selectOne("boardSQL.modifyBoard", map);
 		sqlSession.close();
 	}
-	public List<BoardDTO> searchBoard(Map<String, String> map) {
+	public List<BoardDTO> searchBoard(Map<String, Object> map) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		List<BoardDTO> list = sqlSession.selectList("boardSQL.searchBoard",map);
 		sqlSession.close();
 		return list;
 	}
-	public int getTotalB(String keyword) {
+	public int getTotalB(String keyword,String searchOption) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("keyword", keyword);
+		map.put("searchOption", searchOption);
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		int totalB= sqlSession.selectOne("boardSQL.getTotalB",keyword);
+		int totalB= sqlSession.selectOne("boardSQL.getTotalB",map);
 		return totalB;
+	}
+	public void hitUpdate(int seq) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		sqlSession.update("boardSQL.hitUpdate", seq);
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	public void boardReply(Map<String, String> map) {
+		BoardDTO pDTO = this.getBoard(Integer.parseInt(map.get("pseq")));
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//step 글순서 업데이트
+		sqlSession.update("boardSQL.boardReply1",pDTO);
+		//insert 답글 작성
+		map.put("ref", pDTO.getRef()+"");
+		map.put("lev", pDTO.getLev()+1+"");
+		map.put("step", pDTO.getStep()+1+"");
+		sqlSession.insert("boardSQL.boardReply2", map);
+		//답글수 update
+		sqlSession.update("boardSQL.boardReply3", pDTO.getSeq());
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	public void deleteBoard(int seq) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();		
+		//답글수 -1
+		sqlSession.update("boardSQL.boardDelete1", seq);
+		//삭제된 원글 답글 제목을 원글이 삭제되었습니다~~~ 라 붙이기
+		sqlSession.update("boardSQL.boardDelete2", seq);
+		//삭제
+		sqlSession.delete("boardSQL.boardDelete3", seq);
+		sqlSession.commit();
+		sqlSession.close();
 	}
 }

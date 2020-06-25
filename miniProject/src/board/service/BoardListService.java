@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,10 +36,6 @@ public class BoardListService implements CommandProcess {
     	map.put("endNum", endNum);
 		List<BoardDTO> list = dao.boardList(map);
 		System.out.println("리스트"+list);
-		request.setAttribute("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-		request.setAttribute("list", list);
-		request.setAttribute("pg", pg);
-		request.setAttribute("id", id);
 		//페이징처리
 		BoardPaging boardPaging = new BoardPaging(); 
 		int totalA = dao.getTotalA();
@@ -47,8 +44,20 @@ public class BoardListService implements CommandProcess {
 		boardPaging.setPageSize(5);
 		boardPaging.setTotalA(totalA);
 		boardPaging.makePagingHTML(totalA);
+		
+		//조회수 증가방지
+		if(session.getAttribute("memId")!=null) {
+			Cookie cookie =new Cookie("memHit","ok");
+			cookie.setMaxAge(30*60);
+			response.addCookie(cookie);
+		}
+		//응답
 		request.setAttribute("boardPaging", boardPaging);
-
+		request.setAttribute("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+		request.setAttribute("list", list);
+		request.setAttribute("id", id);
+		request.setAttribute("pg", pg);
+//		request.setAttribute("id", id);
 		request.setAttribute("display", "/board/boardList.jsp");
 		return "/main/index.jsp";
 	}

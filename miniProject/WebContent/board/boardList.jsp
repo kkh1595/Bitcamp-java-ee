@@ -19,6 +19,7 @@
 </head>
 <a href="boardList.do?pg=1" align=center style=text-decoration:none;color:black><h3>자유게시판</h3></a>
 <body>
+<form name=search method=post action="/miniProject/board/boardSearch.do">
 <table border=3 cellpadding=2 frame="hsides" rules=rows align=center >
 	<tr>
 	<td width=70 align=center colspan=5>글번호</td>
@@ -31,8 +32,16 @@
 	<c:forEach var="board" items="${list }">
 	<tr>
 	<td colspan=5 align=center>${board.seq }</td>
-	<td ><a href="#" id=subject onclick="checkLogin('${id}',${board.seq},${pg})">${board.subject }</a></td>
-	<td align=center>${board.name }</td>
+	<td>
+	<a href="#" id=subject onclick="checkLogin('${id}',${board.seq},${pg})">
+	<c:if test="${board.lev ne 0 }">
+	<c:forEach begin="0" end="${board.lev-1}">
+	<img alt="답글사진" src="../image/reply.gif">
+	</c:forEach>
+	</c:if>
+	${board.subject}</a>
+	</td>
+	<td align=center>${board.name}</td>
 	<td align=center>
 	 <c:if test="${today eq board.logtime}">
 	  <fmt:formatDate value="${board.logtime }" pattern="HH:mm:ss"/>
@@ -47,17 +56,21 @@
 	</c:if>
 	</table>
 <div align=center>${boardPaging.pagingHTML} 
-<c:if test="${id ne null }">
+<c:if test="${id ne null && id ne 'jpcnani' && id ne '123' && id ne '1231'}">
 &emsp;<input type=button value=글작성 onclick="location.href='boardWriteForm.do'">
 </c:if>
+<c:if test="${id eq 'jpcnani' || id eq '1231' || id eq '123' }">
+<input type=button value=이동 onclick="location.href='http://192.168.0.18:8080/miniProject/main/index.do'">
+</c:if>
 </div>
-
-<form name=search method=post action="/miniProject/board/boardSearch.do?pg=1">
-<div align=center><select name=searchOption >
-<option value="search1">제목</option> 
-<option value="search2">작성자</option>
+<br>
+<input type=hidden name=pg value=1> <!--포스트방식으로 pg값을 숨겨서 보내자  -->
+<div align=center ><select name=searchOption  style="height:22px">
+<option  value="subject">제목</option> 
+<option  value="name">작성자</option> 
 </select> 
-<input type=text name=keyword> <input type=submit value=검색 height=10> 
+<input type=search name=keyword style="height:21px" value="${keyword }"> 
+<input type=submit value=검색> 
 </div>
 </form>
 <script type="text/javascript">
@@ -73,7 +86,12 @@ function boardPaging(pg){
 	location.href="boardList.do?pg="+pg;
 }
 function searchPaging(pg){
-	location.href="boardSearch.do?pg="+pg;
+	location.href="boardSearch.do?pg="+pg+"&searchOption=${searchOption}&keyword="+encodeURI("${keyword}");
+}
+window.onload=function (){
+	if(${searchOption!=null}){
+		document.search.searchOption.value="${searchOption}";
+	}
 }
 </script>
 </body>
