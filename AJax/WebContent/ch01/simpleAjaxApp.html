@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type=button value="simple.jsp" onclick="load('simple.jsp')">
+<script type="text/javascript">
+var httpRequest;
+function load(url){
+	httpRequest = new XMLHttpRequest();
+	httpRequest.onreadystatechange = viewMessage;
+	httpRequest.open("GET",url,true);
+	httpRequest.send("");
+}
+function viewMessage() {
+	if(httpRequest.readyState==4){
+		if(httpRequest.status==200){
+// 			alert(httpRequest.responseText);
+			console.log(httpRequest.responseText);
+		}else{
+			alert(httpRequest.status)
+		}
+	}
+}
+</script>
+</body>
+</html>

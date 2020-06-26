@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name=testApp method=post action="">
+<table border=1>
+<tr>
+<td>이름</td>
+<td><input type=text name=name></td>
+</tr>
+<tr>
+<td>생년월일</td>
+<td><input type=text name=birth placeholder="ex)1993/10/29"></td>
+</tr>
+<tr>
+<td colspan=2 align=center>
+<input type=button value=보내기 onclick="toTest('test.jsp')">
+</td>
+</tr>
+</table>
+</form>
+<script type="text/javascript">
+let httpRequest;
+function toTest(url){
+	let name = encodeURIComponent(document.testApp.name.value);
+	let birth = encodeURIComponent(document.testApp.birth.value);
+	httpRequest = new XMLHttpRequest();
+	httpRequest.onreadystatechange = showInfo;
+	httpRequest.open("POST","test.jsp",true);
+	httpRequest.setRequestHeader
+	("Content-Type","application/x-www-form-urlencoded;charset=UTF-8")
+	httpRequest.send("name="+name+"&birth="+birth);
+}
+function showInfo(){
+	if(httpRequest.readyState==4){
+		if(httpRequest.status==200){
+			console.log(httpRequest.responseText);
+		}else {
+			alert(httpRequest.status);
+		}
+	}
+}
+</script>
+</body>
+</html>
