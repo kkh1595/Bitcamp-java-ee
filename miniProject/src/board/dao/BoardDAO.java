@@ -109,7 +109,7 @@ public class BoardDAO {
 		//삭제된 원글 답글 제목을 원글이 삭제되었습니다~~~ 라 붙이기
 		sqlSession.update("boardSQL.boardDelete2", seq);
 		//삭제
-		sqlSession.delete("boardSQL.boardDelete3", seq);
+		sqlSession.update("boardSQL.boardDelete3", seq);
 		sqlSession.commit();
 		sqlSession.close();
 	}
