@@ -8,12 +8,16 @@
 
 	<select id="getImageboardList" parameterType="java.util.Map" resultType="imageboard">
 		select * from 
-		(select rownum rn, temp.* from 
-		(select seq, imageName, imagePrice, imageQty, imageContent, image1 from imageboard order by seq desc) temp) 
+		(select rownum rn, tt.* from 
+		(select seq, imageName, imagePrice, imageQty, imageContent, image1 from imageboard order by seq desc) tt) 
 		where rn between #{startNum} and #{endNum}
 	</select>
 	
 	<select id="getImageboardTotArticle" resultType="int">
 		select count(*) as count from imageboard	
 	</select>
+	
+	<delete id="deleteImageboard" parameterType="String">
+		delete imageboard where seq in ${seq}
+	</delete>
  </mapper>

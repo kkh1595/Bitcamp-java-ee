@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<script type="text/javascript">
+window.onload=function(){
+	alert("삭제 완료");
+	location.href="/miniProject/imageboard/imageboardList.do?pg=1";
+}
+</script>
 </body>
 </html>

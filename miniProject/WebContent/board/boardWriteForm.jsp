@@ -24,7 +24,7 @@
 <input type=button value=글쓰기 onclick="checkBoardWriteForm()">
 </c:if>
 <c:if test="${id eq 'jpcnani'}">
-<input type=button value=이동 onclick="location.href='http://192.168.0.18:8080/miniProject/main/index.do'">
+<input type=button value=글쓰기 onclick="location.href='http://192.168.0.18:8080/miniProject/board/boardWriteForm.do'">
 </c:if>
 <input type=reset value=다시작성>
 <input type=button value=나가기 onclick="location.href='/miniProject/board/boardList.do?pg=1'">
