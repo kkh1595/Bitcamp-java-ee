@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+최근 4일간 최고기온 : <span id="maxtemp"></span>
+<script type="text/javascript">
+window.onload = function(){
+	loadList();
+}
+var httpRequest = null;
+function loadList(){
+	httpRequest = new XMLHttpRequest();
+	httpRequest.onreadystatechange = loadedList;
+	httpRequest.open("GET","getMaxTemperature.jsp",true);
+	httpRequest.send("");
+}
+function loadedList() {
+	if(httpRequest.readyState==4){
+		if(httpRequest.status==200){
+			let csvStr = httpRequest.responseText;
+			let temperatureStrs = csvStr.split(","); //temperatureStrs는 배열, 스플릿된 값들이 착착 들어감
+			var temperatures = new Array(temperatureStrs.length); //temperatureStrs 사이즈만큼의 배열을 만듬
+			for(var i=0; i<temperatureStrs.length;i++){
+				temperatures[i]=parseFloat(temperatureStrs[i]); //스트링을 실수로 변환한 값을 아까만든 배열로 착착 넣어줌
+			}
+			var max= temperatures[0]; //우리가 원하는 맥스값 선언
+			alert(max);
+			for(var i=0; i<temperatures.length;i++){
+				if(max < temperatures[i]) {
+					max = temperatures[i];
+				}
+			}
+			document.getElementById("maxtemp").innerHTML=max;
+		}else{
+			alert(httpRequest.status)
+		}
+	}
+}
+
+
+</script>
+</body>
+</html>

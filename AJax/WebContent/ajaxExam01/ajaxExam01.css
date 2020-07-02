@@ -1,0 +1,10 @@
+@charset "UTF-8";
+div#displayArea{
+/* 	visibility:hidden; */
+	display:none;
+	width:200px;
+	height:200px;
+	border-color:#6699ff;
+	border-style:double;
+	onmouseover:border 5px solid black;
+}
