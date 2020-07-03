@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="imageboardSQL">
 	<insert id="writeImageboard" parameterType="imageboard">
 		insert into imageboard values(imageboard_seq.nextval,#{imageId},#{imageName},#{imagePrice},#{imageQty},#{imageContent},#{image1},sysdate)
@@ -17,7 +16,14 @@
 		select count(*) as count from imageboard	
 	</select>
 	
-	<delete id="deleteImageboard" parameterType="String">
-		delete imageboard where seq in ${seq}
+	<delete id="deleteImageboard" parameterType="java.util.Map">
+		delete imageboard where seq in
+		<foreach collection="array" item="item" index="i" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
 	</delete>
+	
+	<select id="getImageboard" parameterType="int" resultType="imageboard">
+		select * from imageboard where seq=#{seq}
+	</select>
  </mapper>

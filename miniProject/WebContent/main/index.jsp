@@ -16,7 +16,7 @@
 </tr>
 <tr>
 <c:if test="${memId eq null }">
-<td height=400 width=180 valign=top><jsp:include page="../member/loginForm.jsp"/></td>
+<td style="height:400px;width:200px" valign=top><jsp:include page="../member/loginForm.jsp"/></td>
 </c:if>
 <c:if test="${memId ne null }">
 <td height=400 width=180 valign=top><jsp:include page="../member/loginOk.jsp"/></td>

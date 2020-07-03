@@ -4,10 +4,10 @@
 function checkWriteForm() {
 	//if(document.writeForm.name.vlaue == ""){
 	if(document.getElementById("name").value==""){
-		alert("이름을 입력하세요");
+		$('#name').val('이름좀 입력하세요~~~').css('color','red');
 		document.writeForm.name.focus();
 	}else if(document.writeForm.id.value==""){
-		alert("아이디를 입력하세요");
+		$('#writeId').val('비밀번호좀 입력하세요~~~').css('color','red');
 		document.writeForm.id.focus();
 	}else if(document.writeForm.pwd.value==""){
 		alert("비밀번호를 입력하세요");
@@ -40,10 +40,10 @@ function checkModifyForm() {
 }
 function checkLoginForm() {
 	if(document.loginForm.id.value==""){
-		alert("아이디 입력해주세요");
+		$('#loginCheck').text('아이디를 입력하세요').css("color","red").css('font-weight',8).fadeIn(1000);
 		document.loginForm.id.focus();
 	}else if(document.loginForm.pwd.value==""){
-		alert("비밀번호 입력하세요");
+		$('#loginCheck').text('비밀번호를 입력하세요').css("color","red").css("font-weight",8)
 		document.loginForm.pwd.focus();
 	}else{
 		document.loginForm.submit();
@@ -72,35 +72,7 @@ function checkPostClose(zipcode,address){
 	window.close()
 	opener.document.forms[0].addr2.focus()
 }
-function checkWriteForm() {
-	//if(document.writeForm.name.vlaue == ""){
-	if(document.getElementById("name").value==""){
-		alert("이름을 입력하세요");
-		document.writeForm.name.focus();
-	}else if(document.writeForm.id.value==""){
-		alert("아이디를 입력하세요");
-		document.writeForm.id.focus();
-	}else if(document.writeForm.pwd.value==""){
-		alert("비밀번호를 입력하세요");
-		document.writeForm.pwd.focus();
-	}else if(document.writeForm.pwd.value!=document.writeForm.repwd.value){
-		alert("비밀번호가 일치하지 않습니다");
-		document.writeForm.repwd.focus();
-	}else {
-		document.writeForm.submit();
-	}
-}
-function checkLoginForm() {
-	if(document.loginForm.id.value==""){
-		alert("아이디 입력해주세요");
-		document.loginForm.id.focus();
-	}else if(document.loginForm.pwd.value==""){
-		alert("비밀번호 입력하세요");
-		document.loginForm.pwd.focus();
-	}else{
-		document.loginForm.submit();
-	}
-}
+
 
 
 	

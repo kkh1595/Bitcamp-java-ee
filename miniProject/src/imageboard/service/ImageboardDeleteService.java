@@ -11,7 +11,7 @@ public class ImageboardDeleteService implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		String seq = request.getParameter("seq");
+		String[] seq = request.getParameter("seq").split(",");
 		ImageboardDAO imageboardDAO = ImageboardDAO.getInstance();
 		imageboardDAO.deleteImageboard(seq);
 		request.setAttribute("display", "/imageboard/imageboardDelete.jsp");

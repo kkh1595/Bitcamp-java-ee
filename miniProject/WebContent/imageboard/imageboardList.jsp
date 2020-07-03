@@ -50,12 +50,12 @@
 				</c:forEach>
 			</table>
 		</c:if>
-		<div style="text-align: center;">${imageboardPaging.pagingHTML}</div>
 		<c:if test="${memId eq 'admin' }">
-		<div>
+		<div style="float:left;">
 			<input type="button" value="선택 삭제" onclick="deleteImageboard()">
 		</div>
 		</c:if>
+		<div style="text-align:center;width:85%">${imageboardPaging.pagingHTML}</div>
 	</form>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -66,54 +66,48 @@
 // 		        $("input[name=cbx]").prop("checked", false);
 // 		      }
 // 		} 제이쿼리 사용
+//================전체선택,해제 ============================
  			var checkbox = document.querySelectorAll("#cbx");
-//			name 속성은 중복될 수 있다. name=cbx 인 변수의 갯수를 가져온다. 
+			//name 속성은 중복될 수 있다. name=cbx 인 변수의 갯수를 가져온다. 
 			var checkControl =document.getElementById("checkAllb");
 		function checkAll() {
 			if(checkControl.checked){
 				for(var i=0; i<checkbox.length;i++){
 					checkbox[i].checked = true;
+					if(checkbox[i].checked==false){
+						checkControl.checked = false;
+					}
 				}
 			}else {
 				for(var i=0; i<checkbox.length;i++){
 					checkbox[i].checked = false;
+					if(checkbox[i].checked==false){
+						checkControl.checked = false;
+					}
 				}
 			}
-			
 		}
-// 		function deleteImageboard(){
-// 			let checkid="";
-// 			let selectbox = document.getElementsByName("cbx");
-// 			let chk=false;
-// 			let indexid=false;
-// 			for(i=0; i<selectbox.length;i++){
-// 				if(selectbox[i].cheked){
-// 					if(indexid){
-// 						userid=userid+'-';
-// 					}
-// 					userid = userid + selectbox[i].value;
-// 				    indexid = true;
-// 				}
-// 			}
-// 		}
+//==================선택삭제===============================
 		function deleteImageboard(){
-		var sw = 0;
-		var seq = [];
-		checkbox.forEach(o=>{
-			if(o.checked) {
-				sw = 1;
-				seq.push(o.value);
+			let sw=0;
+			let seq = [];
+			let check = document.getElementsByName("cbx");
+			for(j=0;j<check.length;j++){
+				if(check[j].checked) {
+					sw = 1;
+					seq.push(check[j].value);
+				}
 			}
-		})
-		if(sw == 0) alert("삭제할 항목을 선택하세요.");
-		else {
-			if(confirm("정말로 삭제하시겠습니까?")) location.href="/miniProject/imageboard/imageboardDelete.do?seq="+seq; //document.imageboardListForm.submit();
-			
-			else location.href="/miniProject/imageboard/imageboardList.do?pg=1";
-			
+			if(sw == 0){
+				alert("삭제할 항목을 선택하세요.");
+			}else {
+				if(confirm("정말로 삭제하시겠습니까?")){
+					location.href="/miniProject/imageboard/imageboardDelete.do?seq="+seq; //document.imageboardListForm.submit();
+				}else {
+					location.href="/miniProject/imageboard/imageboardList.do?pg=1";
+				}
+			}
 		}
-}
-		
 	</script>
 </body>
 </html>

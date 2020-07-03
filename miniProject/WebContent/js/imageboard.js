@@ -10,3 +10,6 @@ function checkImageboard(){
 	else if(document.imageboardWriteForm.image1.value == "") alert("파일을 등록하세요.");
 	else document.imageboardWriteForm.submit();
 }
+function backToList(pg){
+	location.href="/miniProject/imageboard/imageboardList.do?pg="+pg;
+}

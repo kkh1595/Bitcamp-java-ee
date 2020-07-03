@@ -37,7 +37,6 @@ public class LoginService implements CommandProcess {
 			session.setAttribute("memId", id);
 			session.setAttribute("memEmail", memberDTO.getEmail1()+"@"+memberDTO.getEmail2());
 			request.setAttribute("display", "/top/body.jsp");
-			
 		}
 		
 		return "/main/index.jsp";

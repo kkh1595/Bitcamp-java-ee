@@ -2,6 +2,7 @@ package imageboard.dao;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,10 +54,23 @@ public class ImageboardDAO {
 		session.close();
 		return totalArticle;
 	}
-	public void deleteImageboard(String seq) {
+	public void deleteImageboard(String[] seq) {
+		Map<String,String[]> map = new HashMap<String, String[]>();
+		map.put("array", seq);
+		//		for (int i = 0; i < seq.length; i++) {
+//			System.out.print("seq = "+seq[i]);
+//			map.put("array", seq[i]);
+//		}
+		
 		SqlSession session = sqlSessionFactory.openSession();
-		session.delete("imageboardSQL.deleteImageboard",seq);
+		session.delete("imageboardSQL.deleteImageboard",map);
 		session.commit();
 		session.close();
+	}
+	public ImageboardDTO getImageboard(int seq) {
+		SqlSession session = sqlSessionFactory.openSession();
+		ImageboardDTO imageboardDTO = session.selectOne("imageboardSQL.getImageboard", seq);
+		session.close();
+		return imageboardDTO;
 	}
 }

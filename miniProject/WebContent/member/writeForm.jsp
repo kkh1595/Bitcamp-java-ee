@@ -15,7 +15,7 @@
 		</tr>
 		<tr>
 			<td align=center>아이디</td>
-			<td><input type=text name="id" placeholder="아이디입력">
+			<td><input type=text name="id" id="writeId" placeholder="아이디입력">
 			<input type=button value=중복체크 onclick="checkId()"><input type=hidden name=dup value=unchecked>
 			<input type=hidden name=check value="">
 			</td>
@@ -65,14 +65,14 @@
 			<input type=text name=addr2 id="addr2" placeholder="상세주소 입력" size=40><br></td>
 		</tr>
 		<tr align=center>
-<!-- 			<td colspan=2><input type=button value=회원가입 onclick="checkWriteForm()">  -->
-			<td colspan=2><input type=button value=회원가입 onclick="reject()"> 
+			<td colspan=2><input type=button value=회원가입 onclick="checkWriteForm()"> 
+<!-- 			<td colspan=2><input type=button value=회원가입 onclick="reject()">  -->
 			<input type=reset value=다시작성></td>
 		</tr>
 	</table>
 	</form>
-<script type="text/javascript" src="../js/member.js?ver=1">
-</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../js/member.js?ver=1"></script>
 <script type="text/javascript">
 function reject(){
 	alert("신규가입불가");
