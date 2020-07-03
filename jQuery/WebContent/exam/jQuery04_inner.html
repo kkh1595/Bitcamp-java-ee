@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type=text id="name" value="">
+<p id="disp"><strong>값을 바꿔보세요</strong></p>
+<input type=button id="btn" value=버튼>
+
+<script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+$('#btn').click(function(){
+// 	document.getElementById('name').value="홍길동";
+// $('#name').val('또치');
+
+// let txt = document.getElementById('disp').innerText;
+// let txt = $('#disp').text();
+
+// let html = document.getElementById('disp').innerHTML;
+// let html = $('#disp').html();
+// alert(html);
+
+$('#disp').text("<b>gogogogo");
+});
+</script>
+</body>
+</html>
