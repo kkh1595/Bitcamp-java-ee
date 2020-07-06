@@ -11,22 +11,24 @@
 	<table border="2" cellspacing=0 cellpadding=5>
 		<tr>
 			<td align=center>이름</td>
-			<td><input type=text name="name" id="name" placeholder="이름입력" ></td>
+			<td><input type=text name="name" id="name" placeholder="이름입력" >
+			<div id="divName"></div></td>
 		</tr>
 		<tr>
 			<td align=center>아이디</td>
 			<td><input type=text name="id" id="writeId" placeholder="아이디입력">
-			<input type=button value=중복체크 onclick="checkId()"><input type=hidden name=dup value=unchecked>
-			<input type=hidden name=check value="">
+			<input type=button value=중복체크 onclick="checkId()"><input type=hidden name=dup id="dup" value=unchecked>
+			<div id="divId"></div>
+			<input type=hidden name=check value="" id="check">
 			</td>
 		</tr>
 		<tr>
 			<td align=center>비밀번호</td>
-			<td><input type=password name="pwd"></td>
+			<td><input type=password name="pwd" id="WritePwd"><div id="divPwd"></div></td>
 		</tr>
 		<tr>
 			<td align=center>재확인</td>
-			<td><input type=password name="repwd"></td>
+			<td><input type=password name="repwd" id="repwd"><div id="divRepwd"></div></td>
 		</tr>
 		<tr >
 			<td align=center>성별</td>
@@ -65,7 +67,7 @@
 			<input type=text name=addr2 id="addr2" placeholder="상세주소 입력" size=40><br></td>
 		</tr>
 		<tr align=center>
-			<td colspan=2><input type=button value=회원가입 onclick="checkWriteForm()"> 
+			<td colspan=2><input type=button value=회원가입 id="checkWriteForm"> 
 <!-- 			<td colspan=2><input type=button value=회원가입 onclick="reject()">  -->
 			<input type=reset value=다시작성></td>
 		</tr>

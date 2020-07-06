@@ -22,7 +22,7 @@
 			<td><input type=password name="pwd" id="pwd" placeholder="비밀번호 입력"></td>
 		</tr>
 		<tr>
-			<td align=center colspan=2><input type=button value=로그인 id=checkbtn onclick="checkLoginForm()">
+			<td align=center colspan=2><input type=button value=로그인 id="checkLoginForm">
 			 <input type=button value=회원가입 onclick="location.href='/miniProject/member/writeForm.do'"></td>
 		</tr>
 	</table>

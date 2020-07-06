@@ -1,28 +1,29 @@
 /**
  * 
  */
-function checkWriteForm() {
-	//if(document.writeForm.name.vlaue == ""){
-	if(document.getElementById("name").value==""){
-		$('#name').val('이름좀 입력하세요~~~').css('color','red');
-		document.writeForm.name.focus();
+$('#checkWriteForm').click(function(){
+	$('#divName').empty();
+	$('#divId').empty();
+	$('#divPwd').empty();
+	$('#divRepwd').empty();
+	if(document.writeForm.name.value==""){
+		$('#divName').text('이름을 입력하세요').css('color','red').css('font-size','8pt').css('font-weight','bold');
+		$('#name').focus();
 	}else if(document.writeForm.id.value==""){
-		$('#writeId').val('비밀번호좀 입력하세요~~~').css('color','red');
-		document.writeForm.id.focus();
+		$('#divId').text('아이디를 입력하세요').css('color','red').css('font-size','8pt').css('font-weight','bold');
+		$('#writeId').focus();
 	}else if(document.writeForm.pwd.value==""){
-		alert("비밀번호를 입력하세요");
-		document.writeForm.pwd.focus();
-	}else if(document.writeForm.pwd.value!=document.writeForm.repwd.value){
-		alert("비밀번호가 일치하지 않습니다");
-		document.writeForm.repwd.focus();
-	}else if(document.writeForm.dup.value=="unchecked") {
-		alert("중복체크를 진행해주세요");
-	}else if(document.writeForm.dup.value!=document.writeForm.id.value){
-		alert("중복체크를 다시 진행해주세요");
+		$('#divPwd').text('비밀번호를 입력하세요').css('color','red').css('font-size','8pt').css('font-weight','bold');
+		$('#WritePwd').focus();
+	}else if($('#WritePwd').val()!=$('#repwd').val()){
+		$('#divRepwd').text('비밀번호가 일치하지 않습니다').css('color','red').css('font-size','8pt').css('font-weight','bold');
+		$('#repwd').focus();
+	}else if($('#check').val()!=$('#writeId').val()){
+		$('#divId').text('중복체크는 필수입니다').css('color','red').css('font-size','8pt').css('font-weight','bold');
 	}else {
-		document.writeForm.submit();
+		$('form[name=writeForm]').submit();
 	}
-}
+});
 function checkModifyForm() { 
 	//if(document.writeForm.name.vlaue == ""){
 	if(document.getElementById("name").value==""){
@@ -38,17 +39,36 @@ function checkModifyForm() {
 		document.modifyForm.submit();
 	}
 }
-function checkLoginForm() {
+//==========제이쿼리 이용======================
+$('#checkLoginForm').click(function(){
+	$('#id').on('change keyup paste',function(){
+	$('#loginCheck').empty();
+	});
+	$('#pwd').on('change keyup paste',function(){
+		$('#loginCheck').empty();
+	});
 	if(document.loginForm.id.value==""){
-		$('#loginCheck').text('아이디를 입력하세요').css("color","red").css('font-weight',8).fadeIn(1000);
+		$('#loginCheck').text('아이디를 입력하세요').css('color','red').css('font-size','8pt');
 		document.loginForm.id.focus();
 	}else if(document.loginForm.pwd.value==""){
-		$('#loginCheck').text('비밀번호를 입력하세요').css("color","red").css("font-weight",8)
+		$('#loginCheck').text('비밀번호를 입력하세요').css('color','red').css('font-size','8pt');
 		document.loginForm.pwd.focus();
 	}else{
 		document.loginForm.submit();
 	}
-}
+});
+//==============onclick 이용===========
+//function checkLoginForm() {
+//	if(document.loginForm.id.value==""){
+//		$('#loginCheck').text('아이디를 입력하세요').css("color","red").css('font-weight','8pt');
+//		document.loginForm.id.focus();
+//	}else if(document.loginForm.pwd.value==""){
+//		$('#loginCheck').text('비밀번호를 입력하세요').css("color","red").css("font-weight",'8pt');
+//		document.loginForm.pwd.focus();
+//	}else{
+//		document.loginForm.submit();
+//	}
+//}
 function checkId() {
 	let id = document.writeForm.id.value;
 	let name = document.writeForm.name.value;
