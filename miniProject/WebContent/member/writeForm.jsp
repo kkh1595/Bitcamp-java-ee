@@ -17,7 +17,7 @@
 		<tr>
 			<td align=center>아이디</td>
 			<td><input type=text name="id" id="writeId" placeholder="아이디입력">
-			<input type=button value=중복체크 onclick="checkId()"><input type=hidden name=dup id="dup" value=unchecked>
+<!-- 			<input type=button value=중복체크  id="checkId"> -->
 			<div id="divId"></div>
 			<input type=hidden name=check value="" id="check">
 			</td>

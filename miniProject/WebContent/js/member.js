@@ -69,14 +69,20 @@ $('#checkLoginForm').click(function(){
 //		document.loginForm.submit();
 //	}
 //}
-function checkId() {
-	let id = document.writeForm.id.value;
-	let name = document.writeForm.name.value;
+$('#writeId').focusout(function(){
+	var popupX = (window.screen.width / 2) - (300 / 2);
+	// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+	var popupY= (window.screen.height / 2) - (300 / 2);
+	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
+	$('#writeId').on('change keyup paste',function(){
+		$('#divId').empty();
+	})
+	let id = $('#writeId').val();
 	if(id==""){
-		alert("아이디를 입력해주세요");
+		$('#divId').text('아이디를 입력해주세요').css('color','red').css('font-size','8pt');
 	}else 
-		window.open("/miniProject/member/checkId.do?id="+id,"","width=300 height=100 location")
-}
+		window.open("/miniProject/member/checkId.do?id="+id,"","width=300 height=100 left="+popupX+" top="+popupY);
+});
 function checkIdClose(id) {
 	opener.writeForm.check.value = id
 	opener.writeForm.id.value = id
